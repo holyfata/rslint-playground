@@ -4,55 +4,7 @@
 
 import { spawn, ChildProcess } from 'child_process';
 import path from 'path';
-
-/**
- * Types for rslint IPC protocol
- */
-interface Position {
-  line: number;
-  column: number;
-}
-
-interface Range {
-  start: Position;
-  end: Position;
-}
-
-interface Diagnostic {
-  ruleName: string;
-  message: string;
-  messageId: string;
-  filePath: string;
-  range: Range;
-  severity?: string;
-  suggestions: any[];
-}
-
-interface LintResponse {
-  diagnostics: Diagnostic[];
-  errorCount: number;
-  fileCount: number;
-  ruleCount: number;
-  duration: string;
-}
-
-interface LintOptions {
-  files?: string[];
-  config?: string; // Path to rslint.json config file
-  workingDirectory?: string;
-  ruleOptions?: Record<string, string>;
-  fileContents?: Record<string, string>; // Map of file paths to their contents for VFS
-}
-
-interface RSlintOptions {
-  rslintPath?: string;
-  workingDirectory?: string;
-}
-
-interface PendingMessage {
-  resolve: (data: any) => void;
-  reject: (error: Error) => void;
-}
+import { PendingMessage, RSlintOptions, LintOptions, LintResponse } from '@/types';
 
 /**
  * Wrapper for the rslint binary communication via IPC
