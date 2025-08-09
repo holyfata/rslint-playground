@@ -17,3 +17,19 @@ export async function GET(request: NextRequest) {
         return NextResponse.json({ error: 'Failed to get file' }, { status: 500 })
     }
 }
+
+export async function POST(request: NextRequest) {
+    try {
+        const body = await request.json()
+        const { relPath, content } = body
+        if (!relPath || !content) {
+            return NextResponse.json({ error: 'relPath and content are required' }, { status: 400 })
+        }
+        const filePath = path.join(process.cwd(), 'worker', relPath)
+        fs.writeFileSync(filePath, content)
+        return NextResponse.json({ message: 'File saved successfully' })
+    } catch (error) {
+        console.error('POST /api/file', error)
+        return NextResponse.json({ error: 'Failed to save file' }, { status: 500 })
+    }
+}

@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 const CodeEditor = () => {
     const [code, setCode] = useState("");
-    
+
     useEffect(() => {
         fetch('/api/file?relPath=src/index.ts', {
             method: 'GET'
@@ -27,10 +27,21 @@ const CodeEditor = () => {
             })
     }, [])
 
+    const handleValueChange = (value: string) => {
+        setCode(value)
+        fetch('/api/file', {
+            method: 'POST',
+            body: JSON.stringify({
+                relPath: 'src/index.ts',
+                content: value
+            })
+        })
+    }
+
     return (
         <Editor 
             value={code}
-            onValueChange={setCode}
+            onValueChange={handleValueChange}
             highlight={code => highlight(code, Prism.languages.js, 'js')}
             padding={10}
             style={{
