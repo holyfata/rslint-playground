@@ -1,4 +1,5 @@
 import CodeEditor from "@/components/CodeEditor";
+import Options from "@/components/Options";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
             <CodeEditor />
           </section>
           <section className="border-t border-gray-200">
-            Options
+            <Options />
           </section>
         </section>
         <section className="border-l border-gray-200">

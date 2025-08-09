@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.semi-json-viewer>.json-viewer-container:nth-last-child(2) {
+  display: none;
+}
