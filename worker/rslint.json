@@ -1,0 +1,9 @@
+[
+  {
+    "languageOptions": {
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      }
+    }
+  }
+]
