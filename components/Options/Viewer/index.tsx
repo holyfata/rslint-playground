@@ -25,11 +25,11 @@ const Viewer = ({ relPath }: { relPath: string }) => {
     }, [])
 
     const handleValueChange = (value: string) => {
-        setValue(value)
         fetch('/api/file', {
             method: 'POST',
             body: JSON.stringify({  
                 relPath,
+                content: value
             })
         })
     }
