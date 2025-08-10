@@ -1,6 +1,7 @@
 import CodeEditor from "@/components/CodeEditor";
 import Options from "@/components/Options";
 import LintButton from "@/components/LintButton";
+import Message from "@/components/Message";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
           </section>
         </section>
         <section className="border-l border-gray-200">
-          MessageBox
+          <Message />
         </section>
       </main>
     </div>
