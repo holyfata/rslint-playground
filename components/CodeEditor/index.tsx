@@ -38,36 +38,36 @@ const CodeEditor = () => {
         })
     }
 
-    // 将lint结果转换为Monaco Editor的markers格式
+    // Convert lint results to Monaco Editor markers format
     const markers = useMemo(() => {
         if (!lintResult?.diagnostics) return [];
         console.log('lintResult', lintResult)
         
         return lintResult.diagnostics.map((diagnostic: Diagnostic) => ({
-            startLineNumber: diagnostic.range.start.line, // Monaco使用1-based行号
-            startColumn: diagnostic.range.start.column,   // Monaco使用1-based列号
+            startLineNumber: diagnostic.range.start.line, // Monaco uses 1-based line numbers
+            startColumn: diagnostic.range.start.column,   // Monaco uses 1-based column numbers
             endLineNumber: diagnostic.range.end.line,
             endColumn: diagnostic.range.end.column,
             message: diagnostic.message,
-            severity: 8, // 8 = Error (红色), 4 = Warning (黄色), 1 = Info (蓝色)
+            severity: 8, // 8 = Error (red), 4 = Warning (yellow), 1 = Info (blue)
             code: diagnostic.ruleName,
             source: 'rslint'
         }));
     }, [lintResult]);
 
-    // 编辑器挂载后的回调，用于设置markers
+    // Callback after editor mounts, used to set markers
     const handleEditorDidMount = (editor: any, monaco: any) => {
-        // 设置markers
+        // Set markers
         if (markers.length > 0) {
             monaco.editor.setModelMarkers(editor.getModel(), 'rslint', markers);
         }
     };
 
-    // 当markers变化时更新编辑器
+    // Update editor when markers change
     useEffect(() => {
         // @ts-ignore
         if (window.monaco && markers.length > 0) {
-            // 获取当前编辑器实例并更新markers
+            // Get current editor instance and update markers
             // @ts-ignore
             const editor = window.monaco.editor.getEditors()[0];
             if (editor) {
