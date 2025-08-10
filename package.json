@@ -13,6 +13,7 @@
   "dependencies": {
     "@douyinfe/semi-icons": "^2.84.0",
     "@douyinfe/semi-ui": "^2.84.0",
+    "@monaco-editor/react": "^4.7.0",
     "@rslint/core": "^0.1.7",
     "next": "15.4.6",
     "prismjs": "^1.30.0",
