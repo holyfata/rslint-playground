@@ -22,7 +22,7 @@ class RSLintService {
     this.nextMessageId = 1;
     this.pendingMessages = new Map();
     this.rslintPath =
-      options.rslintPath || path.join(import.meta.dirname, '../bin/rslint');
+      options.rslintPath || path.join(process.cwd(), './@rslint/core/bin/rslint.cjs');
 
     this.process = spawn(this.rslintPath, ['--api'], {
       stdio: ['pipe', 'pipe', 'inherit'],
