@@ -28,7 +28,6 @@ const CodeEditor = () => {
     }, [])
 
     const handleValueChange = (value: string) => {
-        setCode(value)
         fetch('/api/file', {
             method: 'POST',
             body: JSON.stringify({
