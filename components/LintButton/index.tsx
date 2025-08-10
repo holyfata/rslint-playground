@@ -1,9 +1,10 @@
 "use client";
 import { Button } from "@douyinfe/semi-ui"
-import { useRuleStore } from "@/store";
+import { useRuleStore, useLintResultStore } from "@/store";
 
 const LintButton = () => {
     const { ruleOptions } = useRuleStore()
+    const { setLintResult } = useLintResultStore()
 
     const handleLint = () => {
         fetch('/api/lint', {
@@ -12,7 +13,7 @@ const LintButton = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+                setLintResult(data.result)
             })
             .catch(err => {
                 console.error('Failed to lint', err)

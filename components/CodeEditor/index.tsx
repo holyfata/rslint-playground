@@ -5,9 +5,11 @@ import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import "prismjs/themes/prism.css";
 import { useEffect, useState } from "react";
+import { useLintResultStore } from "@/store";
 
 const CodeEditor = () => {
     const [code, setCode] = useState("");
+    const lintResult = useLintResultStore((state) => state.lintResult)
 
     useEffect(() => {
         fetch('/api/file?relPath=src/index.ts', {
@@ -38,15 +40,18 @@ const CodeEditor = () => {
     }
 
     return (
-        <Editor 
-            value={code}
-            onValueChange={handleValueChange}
-            highlight={code => highlight(code, Prism.languages.js, 'js')}
-            padding={10}
-            style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-            }}
-        />
+        <div>
+            {lintResult && <div>{JSON.stringify(lintResult)}</div>}
+            <Editor 
+                value={code}
+                onValueChange={handleValueChange}
+                highlight={code => highlight(code, Prism.languages.js, 'js')}
+                padding={10}
+                style={{
+                    fontFamily: '"Fira code", "Fira Mono", monospace',
+                }}
+            />
+        </div>
     )
 }
 

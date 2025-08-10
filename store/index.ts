@@ -1,3 +1,4 @@
+import { LintResponse } from "@/types"
 import { create } from "zustand"
 
 const defaultRuleOptions = {
@@ -12,6 +13,18 @@ export const useRuleStore = create<{
         ruleOptions: defaultRuleOptions,
         setRuleOptions: (ruleOptions) => {
             set({ ruleOptions })
+        }
+    }
+})
+
+export const useLintResultStore = create<{
+    lintResult: LintResponse | null
+    setLintResult: (lintResult: LintResponse) => void
+}>((set) => {
+    return {
+        lintResult: null,
+        setLintResult: (lintResult) => {
+            set({ lintResult })
         }
     }
 })
