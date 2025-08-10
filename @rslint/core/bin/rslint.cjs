@@ -10,10 +10,9 @@ function getBinPath() {
     return path.resolve(__dirname, './rslint.exe');
   }
   let platformKey = `${process.platform}-${os.arch()}`;
+  const binPath = path.join(process.cwd(), '@rslint', platformKey, `rslint${process.platform === 'win32' ? '.exe' : ''}`)
 
-  return require.resolve(
-    `@rslint/${platformKey}/rslint${process.platform === 'win32' ? '.exe' : ''}`,
-  );
+  return require.resolve(binPath);
 }
 function main() {
   const binPath = getBinPath();
